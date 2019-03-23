@@ -1,5 +1,5 @@
-#ifndef PROPOSE_CLOCK_APP_H
-#define PROPOSE_CLOCK_APP_H
+#ifndef PROPOSE_MENU_APP_H
+#define PROPOSE_MENU_APP_H
 
 #include "app.h"
 
@@ -7,11 +7,11 @@ namespace app
 {
 using namespace std;
 
-class ClockApp : public App
+class MenuApp : public App
 {
 public:
-  ClockApp();
-  virtual ~ClockApp() {}
+  MenuApp();
+  virtual ~MenuApp() {}
 
 public:
   int Install(App * container);
@@ -23,6 +23,8 @@ public:
   string describe();
 
 private:
+   App * _current_app;
+   vector<App *> _apps;
 };
 
 } // namespace app

@@ -8,6 +8,11 @@ ClockApp::ClockApp()
     _interrupt_received = false;
 }
 
+int ClockApp::Install(App * container){
+   assert(container != NULL);
+   container->Install(this);
+}
+
 int ClockApp::Init(RGBMatrix *matrix)
 {
     this->_matrix = matrix;
@@ -21,7 +26,7 @@ int ClockApp::Start()
     next_time.tv_nsec = 0;
     struct tm tm;
     const char *time_format = "%H:%M:%S";
-    Color color(255, 255, 0);
+    Color color(0, 255, 0);
     Color bg_color(0, 0, 0);
     Color outline_color(0, 0, 0);
     bool with_outline = false;
@@ -64,7 +69,6 @@ int ClockApp::Start()
         rgb_matrix::DrawText(offscreen, font, x, y + font.baseline(),
                              color, NULL, text_buffer,
                              letter_spacing);
-
 
         // Wait until we're ready to show it.
         clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &next_time, NULL);

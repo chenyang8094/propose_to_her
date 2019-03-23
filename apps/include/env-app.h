@@ -1,5 +1,5 @@
-#ifndef PROPOSE_CLOCK_APP_H
-#define PROPOSE_CLOCK_APP_H
+#ifndef PROPOSE_ENV_APP_H
+#define PROPOSE_ENV_APP_H
 
 #include "app.h"
 
@@ -7,11 +7,11 @@ namespace app
 {
 using namespace std;
 
-class ClockApp : public App
+class EnvApp : public App
 {
 public:
-  ClockApp();
-  virtual ~ClockApp() {}
+  EnvApp();
+  virtual ~EnvApp() {}
 
 public:
   int Install(App * container);

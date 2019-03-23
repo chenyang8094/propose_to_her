@@ -13,8 +13,8 @@ CUR_OBJS=${patsubst %.cc, %.o, $(CUR_SOURCE)}
 export CXX ROOT_DIR CXXFLAGS ARFLAG
 
 INCLUDES=$(wildcard ./app/include/*.h ./sensor-driver/include/*.h ./algorithm/include/*.h) 
-INCLUDE_DIRS=-I./app/include/ -I./led-matrix-driver/include -I./sensor-driver/include/
-LDFLAGS+=-L./lib/ -L/usr/local/lib -lapp -lrgbmatrix -lwiringPi -lwiringPiDev -lrt -lm -lpthread  -lcrypt 
+INCLUDE_DIRS=-I./app/include/ -I./led-matrix-driver/include -I./sensor-driver/include/ -I./apps/include/
+LDFLAGS+=-L./lib/ -L/usr/local/lib -lapp -lsensor-driver -lrgbmatrix -lwiringPi -lwiringPiDev -lrt -lm -lpthread  -lcrypt 
 
 all : $(TARGET) 
 

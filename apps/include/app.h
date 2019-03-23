@@ -10,7 +10,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <thread>
+#include <vector>
+#include <assert.h>
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 #include "led-matrix.h"
 #include "graphics.h"
@@ -28,6 +31,7 @@ class App
     virtual ~App() {}
 
     /* life cycle */
+    virtual int Install(App * container) = 0;
     virtual int Init(RGBMatrix *matrix) = 0;
     virtual int Start() = 0;
     virtual int Stop() = 0;
