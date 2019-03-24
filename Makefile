@@ -12,6 +12,11 @@ CUR_OBJS=${patsubst %.cc, %.o, $(CUR_SOURCE)}
 
 export CXX ROOT_DIR CXXFLAGS ARFLAG
 
+# Imagemagic flags, only needed if actually compiled.
+MAGICK_CXXFLAGS=`GraphicsMagick++-config --cppflags --cxxflags`
+MAGICK_LDFLAGS=`GraphicsMagick++-config --ldflags --libs`
+AV_CXXFLAGS=`pkg-config --cflags  libavcodec libavformat libswscale libavutil`
+
 INCLUDES=$(wildcard ./app/include/*.h ./sensor-driver/include/*.h ./algorithm/include/*.h) 
 INCLUDE_DIRS=-I./app/include/ -I./led-matrix-driver/include -I./sensor-driver/include/ -I./apps/include/
 LDFLAGS+=-L./lib/ -L/usr/local/lib -lapp -lsensor-driver -lrgbmatrix -lwiringPi -lwiringPiDev -lrt -lm -lpthread  -lcrypt 
@@ -19,10 +24,10 @@ LDFLAGS+=-L./lib/ -L/usr/local/lib -lapp -lsensor-driver -lrgbmatrix -lwiringPi 
 all : $(TARGET) 
 
 $(TARGET) : $(CUR_OBJS) $(SUBDIRS)
-	$(CXX) $< -o $@ $(LDFLAGS)
+	$(CXX) $< -o $@ $(LDFLAGS) $(MAGICK_LDFLAGS)
 
 $(CUR_OBJS) : %.o : %.cc 
-	$(CXX) -c $(CXXFLAGS) $< -o $@ $(INCLUDE_DIRS)
+	$(CXX) -c $(CXXFLAGS) $(MAGICK_CXXFLAGS) $< -o $@ $(INCLUDE_DIRS)
 
 $(SUBDIRS):ECHO
 	$(MAKE) -C $@

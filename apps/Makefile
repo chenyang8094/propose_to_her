@@ -2,7 +2,7 @@ LIB_DIR = ./../lib/
 TOP_DIR = ./..
 
 SOURCES = $(wildcard ./src/*.cc)
-INCLUDE_DIRS = -I./include  -I./../led-matrix-driver/include -I./../sensor-driver/include/
+INCLUDE_DIRS = -I./include  -I./../led-matrix-driver/include -I./../sensor-driver/include/ -I/usr/include/GraphicsMagick/
 
 TARGET = libapp.a
 OBJECTS = $(patsubst %.cc,%.o,$(SOURCES))

@@ -1,12 +1,14 @@
 #ifndef __BMP180__
 #define __BMP180__
-
+namespace sensor
+{
 #define BMP180_PRE_OSS0 0 // ultra low power
 #define BMP180_PRE_OSS1 1 // standard
 #define BMP180_PRE_OSS2 2 // high resolution
 #define BMP180_PRE_OSS3 3 // ultra high resoultion
 
-typedef struct {
+typedef struct
+{
 	/* Eprom values */
 	int ac1;
 	int ac2;
@@ -21,7 +23,7 @@ typedef struct {
 	int md;
 } bmp180_eprom_t;
 
-void *bmp180_init(int address, const char* i2c_device_filepath);
+void *bmp180_init(int address, const char *i2c_device_filepath);
 
 void bmp180_close(void *_bmp);
 
@@ -34,5 +36,7 @@ float bmp180_temperature(void *_bmp);
 float bmp180_altitude(void *_bmp);
 
 void bmp180_dump_eprom(void *_bmp, bmp180_eprom_t *eprom);
+
+} // namespace sensor
 
 #endif

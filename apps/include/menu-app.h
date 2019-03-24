@@ -9,16 +9,22 @@ using namespace std;
 
 class MenuApp : public App
 {
-public:
+private:
   MenuApp();
   virtual ~MenuApp() {}
 
 public:
+  static App * getMenuAppSingleton();
+
+public:
   int Install(App * container);
+  int Uninstall(App * container);
   int Init(RGBMatrix *matrix);
   int Start();
   int Stop();
   int Suspended();
+  int ReceiveEvent(AppEvent * event);
+  AppEvent * Notification();
   string name();
   string describe();
 

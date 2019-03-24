@@ -11,14 +11,11 @@
 using namespace std;
 using namespace app;
 
-volatile bool exit_flag = false;
-
-App * menu_app;
+App * main_app;
 
 static void InterruptHandler(int signo)
 {
-    exit_flag = true;
-    menu_app->Stop();
+    main_app->Stop();
 }
 
 int main(int argc, char **argv)
@@ -26,11 +23,7 @@ int main(int argc, char **argv)
     signal(SIGTERM, InterruptHandler);
     signal(SIGINT, InterruptHandler);
 
-    menu_app = new MenuApp();
-    menu_app->Init(NULL);
-
-    while (!exit_flag)
-    {
-        menu_app->Start();
-    }
+    main_app = MenuApp::getMenuAppSingleton();
+    main_app->Init(NULL);
+    main_app->Start();
 }

@@ -5,12 +5,32 @@ namespace app
 
 ClockApp::ClockApp()
 {
-    _interrupt_received = false;
+    _stop = false;
+    _appName = "Clock App";
+    _appInfo = "Clock APp";
 }
+
+ App *ClockApp::getClocAppSingleton(){
+     static ClockApp clockApp;
+     return &clockApp;
+ }
 
 int ClockApp::Install(App * container){
    assert(container != NULL);
    container->Install(this);
+}
+
+int ClockApp::Uninstall(App * container){
+    assert(container != NULL);
+    container->Uninstall(this);
+}
+
+int ClockApp::ReceiveEvent(AppEvent * event){
+
+}
+
+AppEvent * ClockApp::Notification(){
+    return NULL;
 }
 
 int ClockApp::Init(RGBMatrix *matrix)
@@ -54,7 +74,7 @@ int ClockApp::Start()
 
     FrameCanvas *offscreen = _matrix->CreateFrameCanvas();
 
-    while (!_interrupt_received)
+    while (!_stop)
     {
         localtime_r(&next_time.tv_sec, &tm);
         strftime(text_buffer, sizeof(text_buffer), time_format, &tm);
@@ -82,7 +102,7 @@ int ClockApp::Start()
 }
 int ClockApp::Stop()
 {
-    _interrupt_received = true;
+    _stop = true;
     _matrix->Clear();
     return 0;
 }
@@ -92,11 +112,11 @@ int ClockApp::Suspended()
 }
 string ClockApp::name()
 {
-    return "Clock";
+    return _appName;
 }
 string ClockApp::describe()
 {
-    return "Clock describe";
+    return _appInfo;
 }
 
 } // namespace app

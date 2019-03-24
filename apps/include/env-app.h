@@ -9,16 +9,22 @@ using namespace std;
 
 class EnvApp : public App
 {
-public:
+private:
   EnvApp();
   virtual ~EnvApp() {}
 
 public:
-  int Install(App * container);
+  static EnvApp *getEnvAppSingleton();
+
+public:
+  int Install(App *container);
+  int Uninstall(App *container);
   int Init(RGBMatrix *matrix);
   int Start();
   int Stop();
   int Suspended();
+  int ReceiveEvent(AppEvent *event);
+  AppEvent *Notification();
   string name();
   string describe();
 
